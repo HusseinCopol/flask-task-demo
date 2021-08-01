@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="order">
+<h1> Order</h1>
+
+{% if orders|length <1 %}
+
+<h4> Your Shopping basket is empty.Add something to it</h4>
+{% else %}
+<table>
+    <tr>
+        <th>Order</th>
+        <th>Name</th>
+        <th>Customer_id</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>   {{order.id}} </td>
+        <td> {{order.name}}</td>
+        <td> {{order.customer_id}}</td>
+        <td> {{order.date}}</td>
+        <td> {{order.status}}</td>
+        <td> 
+            <a href="/delete/{{order.id}}" > Delete</a>
+            <br>
+            <a href="/update/{{order.id}}" > Update</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<div class="form">
+<form action="/" method="POST">
+    <input type="text" name="order" id="order">
+    <input type="submit" name="add_order" value="Add Order">
+    <input type="submit" name="download_orders" value="Get Orders">
+</form>
+</div>
+</div>
+{% endblock %}
